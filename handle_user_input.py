@@ -20,8 +20,7 @@ def execute_user_command():
         if command.lower() == 'exit':
             exit_command_received = True
         
-        # commare user input to names of commands 
-        
+        # commare user input to names of mapped commands 
         elif command in functions:
             #   if there is a match get functions number of args for that function
             selected_function = functions[command]['function']

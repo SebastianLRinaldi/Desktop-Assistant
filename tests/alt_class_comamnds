@@ -1,0 +1,40 @@
+class CommandManager:
+    def __init__(self):
+        self.commands = {}
+
+    def register_command(self, name, function, description, default_parameters=None, needed_parameters=None, aliases=None):
+        default_parameters = default_parameters or ['None']
+        needed_parameters = needed_parameters or []
+        aliases = aliases or []
+        self.commands[name] = {
+            'function': function,
+            'description': description,
+            'default_parameters': default_parameters,
+            'needed_parameters': needed_parameters,
+            'aliases': aliases
+        }
+
+    def execute_command(self, command_name, *args):
+        if command_name in self.commands:
+            command = self.commands[command_name]
+            command['function'](*args)
+        else:
+            print("Invalid command. Type 'HELP' for a list of available commands.")
+
+# Example functions
+def test_function():
+    print("Executing test function")
+
+def help_function():
+    print("Executing help function")
+
+# Create an instance of CommandManager
+command_manager = CommandManager()
+
+# Register commands
+command_manager.register_command('test', test_function, "This function downloads multiple playlists", aliases=['t'])
+command_manager.register_command('HELP', help_function, "This function provides help information")
+
+# Execute commands
+command_manager.execute_command('test')
+command_manager.execute_command('HELP')
