@@ -7,9 +7,6 @@
 import inspect
 from bot_function_to_user_commands_mapper import functions
 
-def get_input(num_params, command):
-        return [input(f"{functions[command]['description']}\nEnter {functions[command]['needed parameters'][parameter_index]}: ") for parameter_index in range(num_params)]
-
 def execute_user_command():
     # Call the appropriate function based on user choice
     # Get the user's choice
@@ -33,3 +30,14 @@ def execute_user_command():
 
         else:
             print("Invalid command")
+
+
+def get_input(num_params, command):
+    inputs = []
+    for parameter_index in range(num_params):
+        description = functions[command]['description']
+        needed_param = functions[command]['needed parameters'][parameter_index]
+        prompt = f"{description}\nEnter {needed_param}:"
+        user_input = input(prompt)
+        inputs.append(user_input)
+    return inputs
